@@ -2,7 +2,7 @@ interface PostProps {
   id: number;
   title: string;
   toggle: boolean;
-  children?: React.ReactNode; //
+  children?: React.ReactNode;
 }
 
 const Post: React.FC<PostProps> = ({ id, title, toggle, children }) => {
