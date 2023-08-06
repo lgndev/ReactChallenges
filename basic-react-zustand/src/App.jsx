@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { usePokemonStore } from "../Store/pokemonStore";
+import { useRef } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const pokemon = usePokemonStore((state) => {
+    return state.pokemon;
+  });
+  const loading = usePokemonStore((state) => state.loading);
+  const error = usePokemonStore((state) => state.error);
+  const getPokemon = usePokemonStore((state) => state.getPokemon);
+  const inputRef = useRef(null);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ul>
+        {pokemon.length > 0 ? (
+          pokemon.map((pokemon) => {
+            return <li>{pokemon}</li>;
+          })
+        ) : (
+          <li>Search for a pokemon</li>
+        )}
+      </ul>
+      <p>{loading ? "loading" : "done loading"}</p>
+      <p>{error ? error : "no errors"}</p>
+      <button
+        onClick={() => {
+          getPokemon(inputRef.current.value);
+        }}
+      >
+        Get pokemon
+      </button>
+      <form
+        action=""
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <input type="text" name="" id="" ref={inputRef} />
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
