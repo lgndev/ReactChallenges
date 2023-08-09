@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Word from "./components/Word";
+import useWord from "./store/useWord";
+import { useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const word = useWord((state) => state.word);
+  const setWord = useWord((state) => state.setWord);
+  const setCurrentGuess = useWord((state) => state.setCurrentGuess);
+  const resetCurrentGuess = useWord((state) => state.resetCurrentGuess);
+  const incrementRound = useWord((state) => state.incrementRound);
+
+  useEffect(() => {
+    setWord();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+      onKeyDown={(e) => {
+        //..
+        setCurrentGuess(e);
+      }}
+      tabIndex={0}
+    >
+      <p
+        style={{
+          textTransform: "uppercase",
+          fontSize: "32px",
+          fontFamily: "'Roboto Mono', monospace",
+        }}
+      >
+        {/* {word} */}
       </p>
-    </>
-  )
-}
+      <Word order={0} />
+      <Word order={1} />
+      <Word order={2} />
+      <Word order={3} />
+      <Word order={4} />
+      <Word order={5} />
+      <button
+        onClick={resetCurrentGuess}
+        style={{ marginTop: "5px", cursor: "pointer" }}
+      >
+        Reset Current Guess
+      </button>
+      <button
+        onClick={incrementRound}
+        style={{ marginTop: "5px", cursor: "pointer" }}
+      >
+        Submit Guess
+      </button>
+    </div>
+  );
+};
 
-export default App
+export default App;
