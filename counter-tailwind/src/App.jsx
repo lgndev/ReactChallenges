@@ -100,26 +100,3 @@ const App = () => {
 };
 
 export default App;
-
-// next steps
-// - this week next week live coding challenges
-// - last one next tuesday 29th
-
-// - pick candiate to vp of engineering
-// - will be muiltiple
-// - mid to late next week should hear back
-// - sit down meet and greet
-// - no tech challenge
-// - qiuestions about apst experience
-// -
-
-// - asher asked me about why i used inline styles
-// - I exaplained that this was for the context of the exercise and time contraints
-// - I could have quickyl showed him that i knew how to write classes and maybe create and import one into the exampel
-
-// - I got caught up an type casting
-// - didnt realize vlaue enteters into input was string
-// - I could have explained why I was getting a weired state value
-
-// - use developer tools and degbugger more!
-// - I could have seen that value of state in chrome dev tools
